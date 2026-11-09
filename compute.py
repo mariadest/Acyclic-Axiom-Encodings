@@ -82,5 +82,8 @@ for d in derived_vars:
     result = bdd.let({d: True}, F_d)
     prim_reps.append([d, result])
 
+print(layers[0])
+
+
 for d, result in prim_reps:
     print(d + ": " + bdd.to_expr(result))
