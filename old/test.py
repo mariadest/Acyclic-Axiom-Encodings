@@ -29,7 +29,7 @@ clauses = [
     "~axiom_2 | a",
 
     # (16) goals (here the derived variable whos primary representation we want)
-    "a",
+    "b",
 
     # (17)
     "~dep_a_x | ~dep_b_a | dep_b_x",
@@ -55,8 +55,11 @@ for clause in clauses:
     F = F & bdd.add_expr(clause)
 
 # remove all variables except for 'x' and 'a'
-to_remove = [v for v in bdd.vars if v not in {"x", "a"}]
+to_remove = [v for v in bdd.vars if v not in {"x", "b"}]
 tmp = bdd.exist(to_remove, F)
-result = bdd.let({"a": True}, tmp)
+result = bdd.let({"b": True}, tmp)
 
 print(bdd.to_expr(result))
+print(bdd.to_expr(tmp))
+models = list(bdd.pick_iter(tmp))
+print(models)
